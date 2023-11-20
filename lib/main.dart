@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:isspi_bd3/mesWidgets/my_animation.dart';
 import 'package:isspi_bd3/view/my_dashboard.dart';
 import 'package:isspi_bd3/view/my_loading.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
