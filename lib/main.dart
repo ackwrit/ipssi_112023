@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:isspi_bd3/mesWidgets/my_animation.dart';
 import 'package:isspi_bd3/view/my_dashboard.dart';
+import 'package:isspi_bd3/view/my_loading.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyLoading(),
     );
   }
 }
