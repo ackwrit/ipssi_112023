@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:isspi_bd3/mesWidgets/my_bacground.dart';
 import 'package:isspi_bd3/mesWidgets/my_profil.dart';
+import 'package:isspi_bd3/view/my_all_users.dart';
 
 class MyDashBoard extends StatefulWidget {
   const MyDashBoard({super.key});
@@ -50,11 +51,9 @@ class _MyDashBoardState extends State<MyDashBoard> {
           child: Text("Afficher la carte"),
         );
       case 1:
-        return Center(
-          child: Text("Afficher les personnes"),
-        );
+        return const MyAllUsers();
       default:
-        return Text("erreur");
+        return const Text("erreur");
     }
   }
 }
