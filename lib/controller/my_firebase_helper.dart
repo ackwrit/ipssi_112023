@@ -47,4 +47,7 @@ class MyFirebaseHelper {
   }
 
   //mettre à jour les infos d'un utilisateur
+  upadteUser(String uid, Map<String, dynamic> data) {
+    cloudUsers.doc(uid).update(data);
+  }
 }
