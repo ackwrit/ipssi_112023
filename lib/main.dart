@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:isspi_bd3/controller/my_firebase_helper.dart';
+import 'package:isspi_bd3/controller/my_permission_photo.dart';
 import 'package:isspi_bd3/mesWidgets/my_animation.dart';
 import 'package:isspi_bd3/mesWidgets/my_bacground.dart';
 import 'package:isspi_bd3/view/my_dashboard.dart';
@@ -13,6 +14,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  MyPermissionPhoto().init();
   runApp(const MyApp());
 }
 
