@@ -111,10 +111,18 @@ class _MyHomePageState extends State<MyHomePage> {
                     time: 4,
                     child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const MyDashBoard()));
+                          MyFirebaseHelper()
+                              .connectFirebase(
+                                  email: mail.text, password: password.text)
+                              .then((value) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const MyDashBoard()));
+                          }).catchError((onError) {
+                            //afficher un pop
+                            print(onError);
+                          });
                         },
                         child: Text("Connexion")),
                   ),

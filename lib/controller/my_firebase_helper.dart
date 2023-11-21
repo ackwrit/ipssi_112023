@@ -25,6 +25,11 @@ class MyFirebaseHelper {
   }
 
   //connecter un utilisateur
+  Future connectFirebase(
+      {required String email, required String password}) async {
+    UserCredential credential =
+        await auth.signInWithEmailAndPassword(email: email, password: password);
+  }
 
   //ajouter un utilisateur dans la base de donnée
   addUser(String uid, Map<String, dynamic> data) {
