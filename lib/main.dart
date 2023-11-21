@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:isspi_bd3/controller/my_firebase_helper.dart';
 import 'package:isspi_bd3/mesWidgets/my_animation.dart';
+import 'package:isspi_bd3/mesWidgets/my_bacground.dart';
 import 'package:isspi_bd3/view/my_dashboard.dart';
 import 'package:isspi_bd3/view/my_loading.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -41,8 +42,28 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  //variables
   TextEditingController mail = TextEditingController();
   TextEditingController password = TextEditingController();
+
+  //méthode
+  popError() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("Erreur"),
+            content: const Text("adresse mail/ou mot de passe erroné"),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("OK"))
+            ],
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,16 +74,10 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-        appBar: AppBar(
-          // TRY THIS: Try changing the color here to a specific color (to
-          // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-          // change color while the other colors stay the same.
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
-          title: Text(widget.title),
-        ),
-        body: SingleChildScrollView(
+        body: Stack(
+      children: [
+        const MyBackground(),
+        SingleChildScrollView(
             child: Padding(
                 padding: EdgeInsets.all(10),
                 child: Column(children: [
@@ -121,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     builder: (context) => const MyDashBoard()));
                           }).catchError((onError) {
                             //afficher un pop
-                            print(onError);
+                            popError();
                           });
                         },
                         child: Text("Connexion")),
@@ -139,7 +154,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         },
                         child: const Text("Inscription")),
                   ),
-                ]))) // This trailing comma makes auto-formatting nicer for build methods.
+                ]))),
+      ],
+    ) // This trailing comma makes auto-formatting nicer for build methods.
         );
   }
 }

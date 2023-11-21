@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:isspi_bd3/main.dart';
+import 'package:isspi_bd3/mesWidgets/my_bacground.dart';
 import 'package:lottie/lottie.dart';
 
 class MyLoading extends StatefulWidget {
@@ -21,27 +22,32 @@ class _MyLoadingState extends State<MyLoading> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: Stack(
         children: [
-          Container(
-            height: MediaQuery.of(context).size.height * 0.75,
-            child: PageView(
-              controller: pageController,
-              children: [
-                Lottie.asset("assets/01.json"),
-                Lottie.asset("assets/02.json"),
-                Lottie.asset("assets/03.json"),
-                const MyHomePage(title: "dshfjs")
-              ],
-            ),
+          const MyBackground(),
+          Column(
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height * 0.75,
+                child: PageView(
+                  controller: pageController,
+                  children: [
+                    Lottie.asset("assets/01.json"),
+                    Lottie.asset("assets/02.json"),
+                    Lottie.asset("assets/03.json"),
+                    const MyHomePage(title: "dshfjs")
+                  ],
+                ),
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    pageController.nextPage(
+                        duration: Duration(milliseconds: 300),
+                        curve: Curves.linear);
+                  },
+                  child: const Text("Get Started"))
+            ],
           ),
-          ElevatedButton(
-              onPressed: () {
-                pageController.nextPage(
-                    duration: Duration(milliseconds: 300),
-                    curve: Curves.linear);
-              },
-              child: const Text("Get Started"))
         ],
       ),
     );
