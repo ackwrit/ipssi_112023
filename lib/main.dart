@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:isspi_bd3/controller/my_firebase_helper.dart';
 import 'package:isspi_bd3/mesWidgets/my_animation.dart';
 import 'package:isspi_bd3/view/my_dashboard.dart';
 import 'package:isspi_bd3/view/my_loading.dart';
@@ -116,7 +117,20 @@ class _MyHomePageState extends State<MyHomePage> {
                                   builder: (context) => const MyDashBoard()));
                         },
                         child: Text("Connexion")),
-                  )
+                  ),
+
+                  MyAnimation(
+                    time: 5,
+                    child: TextButton(
+                        onPressed: () {
+                          MyFirebaseHelper().createUserFirebase(
+                              email: mail.text,
+                              password: password.text,
+                              nom: "",
+                              prenom: "");
+                        },
+                        child: const Text("Inscription")),
+                  ),
                 ]))) // This trailing comma makes auto-formatting nicer for build methods.
         );
   }
