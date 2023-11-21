@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:isspi_bd3/mesWidgets/my_bacground.dart';
+import 'package:isspi_bd3/mesWidgets/my_profil.dart';
 
 class MyDashBoard extends StatefulWidget {
   const MyDashBoard({super.key});
@@ -18,6 +19,7 @@ class _MyDashBoardState extends State<MyDashBoard> {
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width * 0.75,
         color: Colors.purple,
+        child: const MyProfil(),
       ),
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: indexTapped,

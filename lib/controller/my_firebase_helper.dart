@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:isspi_bd3/model/my_user.dart';
 
 class MyFirebaseHelper {
   final auth = FirebaseAuth.instance;
@@ -8,7 +9,7 @@ class MyFirebaseHelper {
   final storage = FirebaseStorage.instance;
 
   //creer un utilisateur
-  createUserFirebase(
+  Future<MyUser> createUserFirebase(
       {required String email,
       required String password,
       required String nom,
@@ -22,13 +23,22 @@ class MyFirebaseHelper {
       "EMAIL": email,
     };
     addUser(uid, data);
+    return getUser(uid);
   }
 
   //connecter un utilisateur
-  Future connectFirebase(
+  Future<MyUser> connectFirebase(
       {required String email, required String password}) async {
     UserCredential credential =
         await auth.signInWithEmailAndPassword(email: email, password: password);
+    String uid = credential.user!.uid;
+    return getUser(uid);
+  }
+
+  //récupérer les infos de l'utilisateur
+  Future<MyUser> getUser(String uid) async {
+    DocumentSnapshot snapshot = await cloudUsers.doc(uid).get();
+    return MyUser(snapshot);
   }
 
   //ajouter un utilisateur dans la base de donnée

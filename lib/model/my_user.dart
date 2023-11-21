@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class MyUser {
   late String uid;
   late String mail;
@@ -12,5 +14,15 @@ class MyUser {
     mail = "";
     nom = "";
     prenom = "";
+  }
+  MyUser(DocumentSnapshot snapshot) {
+    uid = snapshot.id;
+    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+    mail = data["EMAIL"];
+    nom = data["NOM"];
+    prenom = data["PRENOM"];
+    image = data["IMAGE"] ?? "";
+    favoris = data["FAVORIS"] ?? [];
+    pseudo = data["PSEUDO"] ?? "";
   }
 }
