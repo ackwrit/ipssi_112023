@@ -67,8 +67,8 @@ class _MyProfilState extends State<MyProfil> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.mail),
-              SizedBox(
+              const Icon(Icons.mail),
+              const SizedBox(
                 width: 20,
               ),
               Text(moi.mail),
