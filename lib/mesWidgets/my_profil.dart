@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:isspi_bd3/globale.dart';
 
 class MyProfil extends StatefulWidget {
   const MyProfil({super.key});
@@ -8,6 +9,8 @@ class MyProfil extends StatefulWidget {
 }
 
 class _MyProfilState extends State<MyProfil> {
+  //méthode
+  popUp() {}
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -16,8 +19,7 @@ class _MyProfilState extends State<MyProfil> {
         children: [
           CircleAvatar(
             radius: 80,
-            backgroundImage: NetworkImage(
-                "http://www.captain-drive.com/wp-content/uploads/2014/12/bugatti-veyron.jpeg"),
+            backgroundImage: NetworkImage(moi.image!),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -26,12 +28,21 @@ class _MyProfilState extends State<MyProfil> {
               SizedBox(
                 width: 20,
               ),
-              Text("adresse mail"),
+              Text(moi.mail),
             ],
           ),
-          Text("nom de la personne"),
-          Text("prenom de la personne"),
-          Text("pseudo de la personne"),
+          Row(
+            children: [
+              Text(moi.nom),
+              IconButton(
+                  onPressed: () {
+                    popUp();
+                  },
+                  icon: Icon(Icons.update))
+            ],
+          ),
+          Text(moi.prenom),
+          Text(moi.pseudo!),
         ],
       ),
     );

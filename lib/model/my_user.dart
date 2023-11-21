@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:isspi_bd3/globale.dart';
 
 class MyUser {
   late String uid;
@@ -21,7 +22,7 @@ class MyUser {
     mail = data["EMAIL"];
     nom = data["NOM"];
     prenom = data["PRENOM"];
-    image = data["IMAGE"] ?? "";
+    image = data["IMAGE"] ?? imafeDefault;
     favoris = data["FAVORIS"] ?? [];
     pseudo = data["PSEUDO"] ?? "";
   }

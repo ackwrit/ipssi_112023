@@ -6,6 +6,7 @@ import 'package:isspi_bd3/view/my_dashboard.dart';
 import 'package:isspi_bd3/view/my_loading.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:isspi_bd3/globale.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -130,6 +131,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               .connectFirebase(
                                   email: mail.text, password: password.text)
                               .then((value) {
+                            setState(() {
+                              moi = value;
+                            });
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -146,11 +150,21 @@ class _MyHomePageState extends State<MyHomePage> {
                     time: 5,
                     child: TextButton(
                         onPressed: () {
-                          MyFirebaseHelper().createUserFirebase(
-                              email: mail.text,
-                              password: password.text,
-                              nom: "",
-                              prenom: "");
+                          MyFirebaseHelper()
+                              .createUserFirebase(
+                                  email: mail.text,
+                                  password: password.text,
+                                  nom: "",
+                                  prenom: "")
+                              .then((value) {
+                            setState(() {
+                              moi = value;
+                            });
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const MyDashBoard()));
+                          });
                         },
                         child: const Text("Inscription")),
                   ),
