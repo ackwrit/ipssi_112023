@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:isspi_bd3/mesWidgets/my_bacground.dart';
 import 'package:isspi_bd3/mesWidgets/my_profil.dart';
 import 'package:isspi_bd3/view/my_all_users.dart';
+import 'package:isspi_bd3/view/my_map.dart';
 
 class MyDashBoard extends StatefulWidget {
   const MyDashBoard({super.key});
@@ -47,9 +48,7 @@ class _MyDashBoardState extends State<MyDashBoard> {
   Widget bodyPage() {
     switch (indexTapped) {
       case 0:
-        return const Center(
-          child: Text("Afficher la carte"),
-        );
+        return const MyMap();
       case 1:
         return const MyAllUsers();
       default:
