@@ -15,8 +15,9 @@ class _MyLoadingState extends State<MyLoading> {
   @override
   void initState() {
     // TODO: implement initState
-    pageController = PageController();
+
     super.initState();
+    pageController = PageController();
   }
 
   @override
@@ -27,7 +28,7 @@ class _MyLoadingState extends State<MyLoading> {
           const MyBackground(),
           Column(
             children: [
-              Container(
+              SizedBox(
                 height: MediaQuery.of(context).size.height * 0.75,
                 child: PageView(
                   controller: pageController,

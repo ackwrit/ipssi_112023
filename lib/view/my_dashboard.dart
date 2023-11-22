@@ -47,7 +47,7 @@ class _MyDashBoardState extends State<MyDashBoard> {
   Widget bodyPage() {
     switch (indexTapped) {
       case 0:
-        return Center(
+        return const Center(
           child: Text("Afficher la carte"),
         );
       case 1:
