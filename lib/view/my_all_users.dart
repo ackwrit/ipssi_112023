@@ -42,6 +42,13 @@ class _MyAllUsersState extends State<MyAllUsers> {
                         ),
                         title: Text(lesAutres.nom),
                         subtitle: Text(lesAutres.mail),
+                        trailing: IconButton(
+                          icon: Icon(
+                            Icons.favorite,
+                            color: Colors.red,
+                          ),
+                          onPressed: () {},
+                        ),
                       ),
                     );
                   });
