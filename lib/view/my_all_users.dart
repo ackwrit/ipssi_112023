@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:isspi_bd3/controller/my_firebase_helper.dart';
+import 'package:isspi_bd3/globale.dart';
 import 'package:isspi_bd3/model/my_user.dart';
 
 class MyAllUsers extends StatefulWidget {
@@ -11,6 +12,7 @@ class MyAllUsers extends StatefulWidget {
 }
 
 class _MyAllUsersState extends State<MyAllUsers> {
+  List tableau = [];
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -31,26 +33,46 @@ class _MyAllUsersState extends State<MyAllUsers> {
                   itemCount: documents.length,
                   itemBuilder: (context, index) {
                     MyUser lesAutres = MyUser(documents[index]);
-                    return Card(
-                      elevation: 5,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          radius: 80,
-                          backgroundImage: NetworkImage(lesAutres.image!),
-                        ),
-                        title: Text(lesAutres.nom),
-                        subtitle: Text(lesAutres.mail),
-                        trailing: IconButton(
-                          icon: Icon(
-                            Icons.favorite,
-                            color: Colors.red,
+                    if (moi.uid == lesAutres.uid) {
+                      return Container();
+                    } else {
+                      return Card(
+                        elevation: 5,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            radius: 25,
+                            backgroundImage: NetworkImage(lesAutres.image!),
                           ),
-                          onPressed: () {},
+                          title: Text(lesAutres.nom),
+                          subtitle: Text(lesAutres.mail),
+                          trailing: IconButton(
+                            icon: Icon(
+                              Icons.favorite,
+                              color: (moi.favoris!.contains(lesAutres.uid))
+                                  ? Colors.red
+                                  : Colors.grey,
+                            ),
+                            onPressed: () {
+                              if (moi.favoris!.contains(lesAutres.uid)) {
+                                setState(() {
+                                  moi.favoris!.remove(lesAutres.uid);
+                                  tableau = moi.favoris!;
+                                });
+                              } else {
+                                setState(() {
+                                  moi.favoris!.add(lesAutres.uid);
+                                  tableau = moi.favoris!;
+                                });
+                              }
+                              Map<String, dynamic> data = {"FAVORIS": tableau};
+                              MyFirebaseHelper().upadteUser(moi.uid, data);
+                            },
+                          ),
                         ),
-                      ),
-                    );
+                      );
+                    }
                   });
             }
           }
